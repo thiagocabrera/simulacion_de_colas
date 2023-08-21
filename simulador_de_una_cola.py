@@ -1,8 +1,8 @@
 import random
 
 class SimuladorDeUnaCola:
-    def __init__(self):
-        self.tf = 600
+    def __init__(self, tf):
+        self.tf = tf
         self.tpll = 0
         self.tps = self.high_value()
         self.t = 0
@@ -12,6 +12,8 @@ class SimuladorDeUnaCola:
         self.stpll = 0
         self.stps = 0
         self.ito = 0
+        self.pto = None
+        self.pps = None
 
     def high_value(self):
         return 99999
@@ -36,6 +38,7 @@ class SimuladorDeUnaCola:
             self.tps = self.t + self.ta()
         else:
             self.tps = self.high_value()
+            self.ito = self.t
         self.final()
 
     def llegada(self):
@@ -50,18 +53,16 @@ class SimuladorDeUnaCola:
         self.final()
 
     def final(self):
-        if self.tpll > self.tf:
+        if self.t < self.tf:
+            self.start()
+        else:
             if self.ns == 0:
                 self.resultados()
             else:
                 self.tpll = self.high_value()
                 self.start()
-        else:
-            self.start()
+
 
     def resultados(self):
-        pps = (self.stps - self.stpll) / self.nt
-        pto = self.sto*100/self.t
-        print("RESULTADOS: PPS = %d; PTO = %d" % (pps, pto))
-
-SimuladorDeUnaCola().start()
+        self.pps = (self.stps - self.stpll) / self.nt
+        self.pto = self.sto*100/self.t
