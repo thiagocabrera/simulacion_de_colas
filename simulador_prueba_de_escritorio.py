@@ -1,6 +1,6 @@
 import random
 
-class SimuladorDeUnaCola:
+class SimuladorPruebaDeEscritorio:
     def __init__(self, tf):
         self.tf = tf
         self.tpll = 0
@@ -14,17 +14,13 @@ class SimuladorDeUnaCola:
         self.ito = 0
         self.pto = None
         self.pps = None
+        self.ta = random.randint
+        self.ia = random.randint
 
     def high_value(self):
         return 99999
 
-    def ta(self):
-        return random.randint(1,120)
-
-    def ia(self):
-        return random.randint(1,120)
-
-    def start(self):
+    def simular(self):
         if self.tpll <= self.tps:
             self.llegada()
         else:
